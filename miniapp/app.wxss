@@ -1,0 +1,13 @@
+page {
+  --guming-red: #e8332d;
+  --guming-red-dark: #c0251f;
+  --guming-bg: #f7f6f2;
+  --guming-text: #333333;
+  --guming-text-2: #7a7a7a;
+  --guming-line: #f0e9e2;
+  --guming-price: #e8332d;
+  background: #f7f6f2;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.price { color: #e8332d; font-weight: 700; }

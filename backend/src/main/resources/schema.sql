@@ -1,0 +1,148 @@
+-- 奶茶点单系统建表脚本（MySQL 8.0, utf8mb4）
+CREATE TABLE IF NOT EXISTS store (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    address VARCHAR(255) DEFAULT NULL,
+    phone VARCHAR(30) DEFAULT NULL,
+    business_hours VARCHAR(100) DEFAULT NULL,
+    status TINYINT DEFAULT 1,
+    created_at DATETIME DEFAULT NULL,
+    updated_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS admin_user (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    real_name VARCHAR(50) DEFAULT NULL,
+    role VARCHAR(20) DEFAULT '店员',
+    store_id BIGINT DEFAULT NULL,
+    status TINYINT DEFAULT 1,
+    created_at DATETIME DEFAULT NULL,
+    updated_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS wechat_user (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    openid VARCHAR(100) NOT NULL UNIQUE,
+    nickname VARCHAR(50) DEFAULT NULL,
+    avatar VARCHAR(255) DEFAULT NULL,
+    phone VARCHAR(30) DEFAULT NULL,
+    level VARCHAR(20) DEFAULT '普通会员',
+    role VARCHAR(20) DEFAULT '客户',
+    balance DECIMAL(10,2) DEFAULT 0,
+    total_orders INT DEFAULT 0,
+    total_amount DECIMAL(12,2) DEFAULT 0,
+    max_recharge_amount DECIMAL(12,2) DEFAULT 0,
+    points BIGINT DEFAULT 0,
+    created_at DATETIME DEFAULT NULL,
+    updated_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS category (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    store_id BIGINT DEFAULT NULL,
+    name VARCHAR(50) NOT NULL,
+    sort INT DEFAULT 0,
+    status TINYINT DEFAULT 1
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS product (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    store_id BIGINT DEFAULT NULL,
+    category_id BIGINT DEFAULT NULL,
+    category VARCHAR(50) DEFAULT NULL,
+    name VARCHAR(100) NOT NULL,
+    image VARCHAR(255) DEFAULT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    description VARCHAR(500) DEFAULT NULL,
+    sales BIGINT DEFAULT 0,
+    stock INT DEFAULT 0,
+    status TINYINT DEFAULT 1,
+    recommended TINYINT DEFAULT 0,
+    soldout TINYINT DEFAULT 0,
+    created_at DATETIME DEFAULT NULL,
+    updated_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS inventory_item (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    store_id BIGINT DEFAULT NULL,
+    name VARCHAR(50) NOT NULL,
+    spec VARCHAR(50) DEFAULT NULL,
+    stock INT DEFAULT 0,
+    threshold INT DEFAULT 0,
+    unit VARCHAR(20) DEFAULT NULL,
+    status TINYINT DEFAULT 1,
+    updated_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS orders (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_no VARCHAR(40) NOT NULL UNIQUE,
+    store_id BIGINT DEFAULT NULL,
+    user_id BIGINT DEFAULT NULL,
+    pickup_type VARCHAR(20) DEFAULT '自取',
+    status VARCHAR(20) NOT NULL DEFAULT 'UNPAID',
+    total_amount DECIMAL(10,2) DEFAULT 0,
+    pickup_no VARCHAR(20) DEFAULT NULL,
+    remark VARCHAR(255) DEFAULT NULL,
+    cancel_reason VARCHAR(255) DEFAULT NULL,
+    reject_reason VARCHAR(255) DEFAULT NULL,
+    paid_at DATETIME DEFAULT NULL,
+    done_at DATETIME DEFAULT NULL,
+    created_at DATETIME DEFAULT NULL,
+    updated_at DATETIME DEFAULT NULL,
+    KEY idx_order_user (user_id),
+    KEY idx_order_status (status),
+    KEY idx_order_store (store_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS order_item (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    product_id BIGINT DEFAULT NULL,
+    name VARCHAR(100) DEFAULT NULL,
+    price DECIMAL(10,2) DEFAULT NULL,
+    quantity INT DEFAULT 1,
+    amount DECIMAL(10,2) DEFAULT NULL,
+    sugar VARCHAR(20) DEFAULT NULL,
+    temp VARCHAR(20) DEFAULT NULL,
+    cup_size VARCHAR(20) DEFAULT NULL,
+    KEY idx_order_item_order (order_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS coupon (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(50) DEFAULT 'FULL_REDUCTION',
+    threshold DECIMAL(10,2) DEFAULT NULL,
+    discount DECIMAL(10,2) DEFAULT NULL,
+    total BIGINT DEFAULT 0,
+    used BIGINT DEFAULT 0,
+    start_at DATETIME DEFAULT NULL,
+    end_at DATETIME DEFAULT NULL,
+    status TINYINT DEFAULT 1,
+    points_cost INT DEFAULT 0,
+    once_per_user TINYINT DEFAULT 0,
+    created_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS user_coupon (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    coupon_id BIGINT NOT NULL,
+    status VARCHAR(20) DEFAULT 'UNUSED',
+    order_id BIGINT DEFAULT NULL,
+    used_at DATETIME DEFAULT NULL,
+    created_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS audit_log (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT DEFAULT NULL,
+    username VARCHAR(50) DEFAULT NULL,
+    action VARCHAR(100) DEFAULT NULL,
+    detail VARCHAR(500) DEFAULT NULL,
+    created_at DATETIME DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

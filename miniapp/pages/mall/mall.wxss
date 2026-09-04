@@ -1,0 +1,21 @@
+.page { padding: 24rpx; }
+.hero { display: flex; background: linear-gradient(135deg,#e8332d,#ff6f3c); border-radius: 24rpx; padding: 40rpx 0; color: #fff; box-shadow: 0 8rpx 20rpx rgba(232,51,45,.3); }
+.hp { flex: 1; text-align: center; border-right: 1rpx solid rgba(255,255,255,.2); }
+.hp:last-child { border-right: 0; }
+.hl { font-size: 24rpx; opacity: .85; }
+.hv { font-size: 40rpx; font-weight: 800; margin-top: 10rpx; }
+.hv.small { font-size: 30rpx; }
+.sec { font-weight: 700; margin: 26rpx 8rpx 14rpx; font-size: 30rpx; }
+.card { background: #fff; border-radius: 20rpx; padding: 26rpx; box-shadow: 0 4rpx 16rpx rgba(0,0,0,.05); }
+.row { display: flex; align-items: center; gap: 16rpx; }
+.ipt { flex: 1; background: #f7f6f2; border-radius: 14rpx; padding: 18rpx 22rpx; font-size: 30rpx; }
+.btn { background: #e8332d; color: #fff; padding: 16rpx 34rpx; border-radius: 40rpx; font-size: 28rpx; font-weight: 600; }
+.btn.dis { opacity: .5; }
+.hint { color: #9b9b9b; font-size: 22rpx; margin-top: 18rpx; }
+.coupon { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 20rpx; padding: 26rpx; margin-bottom: 16rpx; box-shadow: 0 4rpx 16rpx rgba(0,0,0,.05); }
+.coupon.mine { border-left: 8rpx solid #f7b500; }
+.cn { font-weight: 700; font-size: 30rpx; }
+.cd { color: #9b9b9b; font-size: 24rpx; margin-top: 8rpx; }
+.cr { display: flex; align-items: center; gap: 16rpx; }
+.cc { color: #e8332d; font-size: 24rpx; }
+.empty { text-align: center; color: #9b9b9b; font-size: 26rpx; padding: 30rpx 0; }

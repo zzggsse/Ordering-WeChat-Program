@@ -1,0 +1,26 @@
+.page { padding: 16rpx; }
+.tabs { display: flex; background: #fff; border-radius: 16rpx; padding: 8rpx; margin-bottom: 20rpx; box-shadow: 0 2rpx 10rpx rgba(0,0,0,.06); }
+.tab { flex: 1; text-align: center; padding: 20rpx 0; color: #7a7a7a; border-radius: 12rpx; font-size: 28rpx; }
+.tab.on { background: #e8332d; color: #fff; font-weight: 700; }
+.order { background: #fff; border-radius: 20rpx; padding: 26rpx; margin-bottom: 16rpx; box-shadow: 0 4rpx 16rpx rgba(0,0,0,.05); }
+.oh { display: flex; justify-content: space-between; align-items: center; }
+.ono { font-size: 24rpx; color: #9b9b9b; }
+.st { font-size: 28rpx; font-weight: 700; }
+.st-ready { color: #e8332d; }
+.st-making { color: #409eff; }
+.st-done { color: #67c23a; }
+.oi { margin: 20rpx 0 16rpx; font-size: 30rpx; font-weight: 600; }
+.of { display: flex; justify-content: space-between; align-items: center; }
+.queue { font-size: 26rpx; color: #7a7a7a; }
+.qn { font-size: 40rpx; color: #e8332d; font-weight: 800; margin-left: 8rpx; }
+.price { font-size: 34rpx; font-weight: 700; color: #333; }
+.tip { margin-top: 16rpx; font-size: 22rpx; color: #9b9b9b; border-top: 1rpx solid #f6f2ec; padding-top: 14rpx; }
+.empty { text-align: center; color: #9b9b9b; padding: 140rpx 0; }
+.e-icon { font-size: 80rpx; margin-bottom: 20rpx; }
+.ot { margin-top: 8rpx; font-size: 22rpx; color: #9b9b9b; }
+.st-unpaid, .st-refunding { color: #e6a23c; }
+.st-canceled, .st-refunded { color: #9b9b9b; }
+.login-btn { margin-top: 30rpx; background: #e8332d; color: #fff; border-radius: 40rpx; width: 320rpx; font-size: 28rpx; text-align: center; line-height: 80rpx; height: 80rpx; }
+
+
+.rcv { margin-top: 18rpx; text-align: center; background: #e8332d; color: #fff; padding: 16rpx 0; border-radius: 40rpx; font-weight: 600; }

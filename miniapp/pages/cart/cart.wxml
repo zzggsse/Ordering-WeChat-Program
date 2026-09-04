@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="empty" wx:if="{{!cart.length}}">
+    <view class="e-icon">🧋</view>
+    <view>购物车空空的，去点一杯吧</view>
+    <view class="e-btn" bindtap="goHome">去点单</view>
+  </view>
+
+  <view class="item" wx:for="{{cart}}" wx:key="id">
+    <image class="pic" src="{{item.image}}" mode="aspectFill" />
+    <view class="info">
+      <view class="nm">{{item.name}}</view>
+      <view class="opt">已选规格 · 正常冰 全糖</view>
+      <view class="price">¥{{item.price}}</view>
+    </view>
+    <view class="right">
+      <view class="stepper">
+        <view class="btn min" bindtap="dec" data-id="{{item.id}}">−</view>
+        <view class="num">{{item.count}}</view>
+        <view class="btn plus" bindtap="inc" data-id="{{item.id}}">＋</view>
+      </view>
+      <view class="del" bindtap="remove" data-id="{{item.id}}">删除</view>
+    </view>
+  </view>
+
+  <view class="foot" wx:if="{{cart.length}}">
+    <view class="f-l">合计 <text class="price fs">¥{{total}}</text></view>
+    <view class="checkout" bindtap="checkout">去结算 ({{checked}})</view>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+<view class="page">
+  <!-- 门店信息 -->
+  <view class="store">
+    <text class="dot">📍</text>
+    <view class="stext">
+      <view class="sn">中心店</view>
+      <view class="sa">XX 路 88 号 · 距你 1.2km</view>
+    </view>
+    <text class="open">营业中</text>
+  </view>
+
+  <view class="block" wx:if="{{items.length}}">
+    <view class="bt">取餐方式</view>
+    <view class="types">
+      <view class="tp {{type==='自取'?'on':''}}" bindtap="pickType" data-t="自取">到店自取</view>
+      <view class="tp {{type==='外带'?'on':''}}" bindtap="pickType" data-t="外带">外带</view>
+    </view>
+  </view>
+
+  <view class="block">
+    <view class="bt">商品明细</view>
+    <view class="line" wx:for="{{items}}" wx:key="id">
+      <view class="liname">{{item.name}} × {{item.count}}</view>
+      <view class="price">¥{{item.price * item.count}}</view>
+    </view>
+  </view>
+
+  <view class="block" wx:if="{{!items.length}}">
+    <view class="ok">订单已提交 ✅</view>
+    <view class="ok-sub">取餐号 {{queueNo}}</view>
+  </view>
+
+  <view class="foot" wx:if="{{items.length}}" bindtap="submit">
+    <view class="amt">合计 <text class="big">¥{{total}}</text></view>
+    <view class="paybtn">{{pay ? '支付中...' : '支付 ¥' + total}}</view>
+  </view>
+</view>

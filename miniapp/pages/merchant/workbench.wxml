@@ -1,0 +1,95 @@
+<view class="page">
+  <block wx:if="{{!loggedIn}}">
+    <view class="login-card">
+      <view class="lc-title">商家工作台</view>
+      <view class="lc-sub">本页面仅供店员 / 店长使用，请先登录</view>
+      <view class="btn" bindtap="goLogin">去登录</view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="head">
+      <view class="ht">商家工作台</view>
+      <view class="role {{isOwner ? 'owner' : ''}}">{{isOwner ? '店长' : role}}</view>
+    </view>
+
+    <view class="tabs">
+      <view class="tab {{activeTab==='orders'?'on':''}}" bindtap="switchTab" data-tab="orders">订单</view>
+      <view class="tab {{activeTab==='inventory'?'on':''}}" bindtap="switchTab" data-tab="inventory">库存</view>
+      <view class="tab {{activeTab==='staff'?'on':''}}" bindtap="switchTab" data-tab="staff" wx:if="{{isOwner}}">员工</view>
+    </view>
+
+    <block wx:if="{{activeTab==='orders'}}">
+      <view class="row" wx:for="{{stats}}" wx:key="label">
+        <view class="cell"><view class="sv">{{item.value}}</view><view class="sl">{{item.label}}</view></view>
+      </view>
+      <view class="sec">今日订单 · 进行中</view>
+      <view class="reload" bindtap="loadOrders">{{loading ? '刷新中…' : '⟳ 刷新'}}</view>
+      <view class="order" wx:for="{{orders}}" wx:key="no">
+        <view class="oh"><text class="ono">{{item.no}}</text><text class="st">{{item.statusText}}</text></view>
+        <view class="oi">{{item.items}}</view>
+        <view class="of">
+          <view class="price">¥{{item.amount}}</view>
+          <view class="queue" wx:if="{{item.queue}}">取餐号 <text class="qn">{{item.queue}}</text></view>
+          <view class="btn" wx:if="{{item.action}}" bindtap="doAction" data-id="{{item.id}}" data-act="{{item.action}}">{{item.actionLabel}}</view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!orders.length && !loading}}">暂无可处理的订单</view>
+    </block>
+
+    <block wx:if="{{activeTab==='inventory'}}">
+      <view class="sec">商品上架 / 下架</view>
+      <view class="reload" bindtap="loadInventory">{{loading ? '刷新中…' : '⟳ 刷新'}}</view>
+      <view class="prod" wx:for="{{products}}" wx:key="id">
+        <view class="prod-top">
+          <view class="ui">
+            <view class="un">{{item.name}}<text class="onu" wx:if="{{item.status!==1}}">（已下架）</text></view>
+            <view class="up">¥{{item.price}} · 销量 {{item.sales || 0}}{{item.soldout===1 ? ' · 售罄' : ''}}</view>
+          </view>
+          <view class="acts">
+            <view class="tb small {{item.soldout===1 ? 'warn' : ''}}" bindtap="toggleSoldout" data-id="{{item.id}}" data-soldout="{{item.soldout}}">{{item.soldout===1 ? '恢复' : '售罄'}}</view>
+            <view class="tb small {{item.status!==1 ? 'offpull' : ''}}" bindtap="toggleShelf" data-id="{{item.id}}" data-status="{{item.status}}">{{item.status===1 ? '下架' : '上架'}}</view>
+          </view>
+        </view>
+        <view class="prod-stock">
+          <text class="pl">单品库存</text>
+          <input class="stock-ipt" type="number" value="{{item.stock}}" bindinput="onProductStock" data-index="{{index}}" />
+          <view class="tb small" bindtap="saveProductStock" data-index="{{index}}">保存</view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!products.length && !loading}}">暂无商品</view>
+
+      <view class="sec">原料库存</view>
+      <view class="inv" wx:for="{{inventory}}" wx:key="id">
+        <view class="ui">
+          <view class="un">{{item.name}}<text class="up">{{item.spec ? ' ' + item.spec : ''}}（{{item.unit}}）</text></view>
+          <view class="up">预警阈值 {{item.threshold}}</view>
+        </view>
+        <view class="inv-right">
+          <input class="stock-ipt" type="number" value="{{item.stock}}" bindinput="onInvStock" data-index="{{index}}" />
+          <view class="tb small" bindtap="updateInvStock" data-index="{{index}}">保存</view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!inventory.length && !loading}}">暂无原料</view>
+    </block>
+
+    <block wx:if="{{activeTab==='staff'}}">
+      <view class="sec">员工管理 · 授予/收回店员权限</view>
+      <view class="search-row">
+        <input class="search-ipt" placeholder="输入手机号搜索" value="{{searchKw}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="searchUsers" />
+        <view class="search-btn" bindtap="searchUsers">搜索</view>
+        <view class="search-clear" wx:if="{{searchKw}}" bindtap="clearSearch">清空</view>
+      </view>
+      <view class="user" wx:for="{{users}}" wx:key="id">
+        <view class="ui">
+          <view class="un">{{item.nickname || item.phone || '匿名用户'}}</view>
+          <view class="up">{{item.phone || ''}} · {{item.role || '客户'}}</view>
+        </view>
+        <view class="tb {{item.role === '店员' ? 'revoke' : ''}}" bindtap="setUserRole" data-id="{{item.id}}" data-role="{{item.role}}">
+          {{item.role === '店员' ? '收回' : '设为店员'}}
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!users.length && !loading}}">暂无可管理的用户</view>
+    </block>
+  </block>
+</view>

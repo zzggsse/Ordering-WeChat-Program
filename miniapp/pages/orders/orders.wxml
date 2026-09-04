@@ -1,0 +1,35 @@
+<view class="page">
+  <view class="tabs">
+    <view class="tab {{active===item.key?'on':''}}" wx:for="{{tabs}}" wx:key="key"
+          bindtap="switchTab" data-key="{{item.key}}">{{item.label}}</view>
+  </view>
+
+  <block wx:if="{{loggedIn}}">
+    <view class="order" wx:for="{{orders}}" wx:key="no" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="oh">
+        <view class="ono">{{item.no}}</view>
+        <view class="st st-{{item.status}}">{{item.statusText}}</view>
+      </view>
+      <view class="ot">{{item.time}}</view>
+      <view class="oi">{{item.items}}</view>
+      <view class="of">
+        <view class="queue" wx:if="{{item.queue}}">取餐号 <text class="qn">{{item.queue}}</text></view>
+        <view class="price">¥{{item.amount}}</view>
+      </view>
+      <view class="tip" wx:if="{{item.tip}}">{{item.tip}}</view>
+      <view class="rcv" wx:if="{{item.status==='ready'}}" catchtap="receive" data-id="{{item.id}}">点击确认已取餐</view>
+    </view>
+
+    <view class="empty" wx:if="{{!orders.length && !loading}}">
+      <view class="e-icon">📦</view>
+      <view>{{active==='today' ? '今日暂无订单' : '暂无历史订单'}}</view>
+    </view>
+  </block>
+
+  <view class="empty" wx:else>
+    <view class="e-icon">🔐</view>
+    <view>登录后查看订单</view>
+    <view class="login-btn" bindtap="goLogin">去登录</view>
+  </view>
+</view>
+

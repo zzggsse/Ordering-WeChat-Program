@@ -1,0 +1,21 @@
+.page { padding: 16rpx 16rpx 150rpx; }
+.store { display: flex; align-items: center; background: #fff; border-radius: 20rpx; padding: 26rpx; margin-bottom: 16rpx; box-shadow: 0 4rpx 16rpx rgba(0,0,0,.05); }
+.dot { font-size: 44rpx; margin-right: 16rpx; }
+.stext { flex: 1; }
+.sn { font-size: 32rpx; font-weight: 700; }
+.sa { font-size: 22rpx; color: #9b9b9b; margin-top: 6rpx; }
+.open { color: #e8332d; font-size: 24rpx; font-weight: 600; }
+.block { background: #fff; border-radius: 20rpx; padding: 26rpx; margin-bottom: 16rpx; box-shadow: 0 4rpx 16rpx rgba(0,0,0,.05); }
+.bt { font-weight: 700; font-size: 30rpx; margin-bottom: 20rpx; }
+.types { display: flex; gap: 20rpx; }
+.tp { flex: 1; text-align: center; padding: 22rpx 0; border-radius: 14rpx; border: 2rpx solid #eee5dc; color: #7a7a7a; }
+.tp.on { border-color: #e8332d; color: #e8332d; background: #fff0ef; font-weight: 600; }
+.line { display: flex; justify-content: space-between; padding: 14rpx 0; color: #555; font-size: 28rpx; }
+.liname { color: #333; }
+.price { color: #333; }
+.ok { font-size: 32rpx; font-weight: 700; text-align: center; padding: 20rpx 0 6rpx; }
+.ok-sub { text-align: center; color: #e8332d; font-size: 40rpx; font-weight: 700; padding-bottom: 20rpx; }
+.foot { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 24rpx 30rpx; box-shadow: 0 -4rpx 16rpx rgba(0,0,0,.07); }
+.amt { font-size: 26rpx; color: #7a7a7a; }
+.big { font-size: 40rpx; color: #333; font-weight: 700; }
+.paybtn { background: #e8332d; color: #fff; padding: 20rpx 56rpx; border-radius: 48rpx; font-weight: 700; }

@@ -1,0 +1,61 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: tea-order-backend
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/tea_order?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+  sql:
+    init:
+      mode: always
+      encoding: utf-8
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      continue-on-error: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:tea-order-course-project-secret-key-0123456789abcdef}
+    expire-minutes: 1440
+  upload:
+    dir: ${UPLOAD_DIR:../uploads}
+    url-prefix: /uploads
+  member:
+    # 消费积分：普通1:1 / 黄金(累计消费满gold-threshold)1:1.2 / 钻石(单次充值满diamond-threshold)1:2
+    gold-threshold: ${GOLD_THRESHOLD:500.0}
+    diamond-threshold: ${DIAMOND_THRESHOLD:500.0}
+    recharge-points-factor: ${RECHARGE_POINTS_FACTOR:1.0}
+  pay:
+    mock: ${PAY_MOCK:true}
+  sms:
+    # 课程演示：mock 模式下验证码固定或在响应中返回，不真实发短信
+    mock: ${SMS_MOCK:true}
+    mock-code: ${SMS_MOCK_CODE:123456}
+    expire-minutes: 5
+
+logging:
+  level:
+    com.tea.order: info
+
+

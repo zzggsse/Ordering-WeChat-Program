@@ -1,0 +1,4 @@
+{
+  "desc": "奶茶点单小程序 sitemap",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

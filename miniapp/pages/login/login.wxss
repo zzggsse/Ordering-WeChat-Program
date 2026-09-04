@@ -1,0 +1,17 @@
+.page { padding: 60rpx 48rpx; }
+.tabs { display: flex; background: #f1ece5; border-radius: 16rpx; padding: 6rpx; margin-bottom: 60rpx; }
+.tab { flex: 1; text-align: center; padding: 18rpx 0; font-size: 28rpx; color: #7a7a7a; border-radius: 12rpx; }
+.tab.on { background: #e8332d; color: #fff; font-weight: 600; }
+.row { display: flex; align-items: center; margin-bottom: 32rpx; border-bottom: 1rpx solid #f0e9e2; padding-bottom: 8rpx; }
+.label { width: 130rpx; font-size: 28rpx; color: #333; }
+.ipt { flex: 1; font-size: 30rpx; }
+.sms { margin: 0 0 0 16rpx; background: #fff3f2; color: #e8332d; font-size: 24rpx; padding: 12rpx 22rpx; border-radius: 8rpx; line-height: 1.2; }
+.sms.dis { color: #bbb; background: #f5f5f5; }
+.btn { margin-top: 48rpx; background: #e8332d; color: #fff; border-radius: 44rpx; font-size: 30rpx; text-align: center; line-height: 88rpx; height: 88rpx; }
+.btn.dis { opacity: .6; }
+.btn.ghost { background: #fff; color: #e8332d; border: 1rpx solid #e8332d; margin-top: 24rpx; }
+.tip { margin-top: 20rpx; text-align: center; font-size: 22rpx; color: #999; }
+.wx-box { text-align: center; padding: 60rpx 0 20rpx; }
+.wx-logo { font-size: 110rpx; }
+.wx-title { font-size: 34rpx; font-weight: 700; margin-top: 20rpx; }
+.wx-desc { font-size: 24rpx; color: #999; margin-top: 12rpx; }

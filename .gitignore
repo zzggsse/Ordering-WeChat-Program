@@ -1,0 +1,10 @@
+# 构建产物 / 依赖
+backend/target/
+admin-pc/node_modules/
+admin-pc/dist/
+tools/
+**/__pycache__/
+*.pyc
+
+# 运行时上传文件
+uploads/

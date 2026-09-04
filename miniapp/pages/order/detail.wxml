@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="hero">
+    <view class="tag">🍹 正在叫号</view>
+    <view class="qn">{{order.queue}}</view>
+    <view class="qst">您的奶茶已准备好，请凭号取餐</view>
+  </view>
+  <view class="card">
+    <view class="l"><text>订单号</text><text class="v">{{order.no}}</text></view>
+    <view class="l"><text>下单时间</text><text class="v">{{order.time}}</text></view>
+    <view class="l"><text>取餐方式</text><text class="v">{{order.type}}</text></view>
+    <view class="l" wx:for="{{order.items}}" wx:key="name"><text>{{item.name}} ×{{item.qty}}</text><text class="v">¥{{item.price * item.qty}}</text></view>
+    <view class="l" wx:if="{{order.note}}"><text>备注</text><text class="v">{{order.note}}</text></view>
+    <view class="l total"><text>实付金额</text><text class="price">¥{{order.amount}}</text></view>
+  </view>
+  <view class="btn-row"><view class="again">再来一单</view><view class="help">联系门店</view></view>
+</view>

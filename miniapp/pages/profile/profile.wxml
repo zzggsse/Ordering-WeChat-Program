@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="avatar-box">
+    <image wx:if="{{avatarSrc}}" class="avatar" src="{{avatarSrc}}" mode="aspectFill" bindtap="chooseAvatar" />
+    <view wx:else class="avatar avatar-ph" bindtap="chooseAvatar">🍹</view>
+    <view class="ava-btn" bindtap="chooseAvatar">更换头像</view>
+    <view class="hint">{{uploading ? '正在上传…' : '点击头像或按钮，从相册/拍照选择'}}</view>
+  </view>
+
+  <view class="form">
+    <view class="row">
+      <text class="label">昵称</text>
+      <input class="ipt" maxlength="20" placeholder="请输入昵称" value="{{nickname}}" bindinput="onNickname" />
+    </view>
+  </view>
+
+  <view class="save {{saving ? 'dis' : ''}}" bindtap="save">{{saving ? '保存中…' : '保存'}}</view>
+</view>

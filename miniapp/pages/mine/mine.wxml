@@ -1,0 +1,43 @@
+<view class="page">
+  <view class="top">
+    <block wx:if="{{loggedIn}}">
+      <image wx:if="{{avatar}}" class="avatar-img" src="{{avatar}}" mode="aspectFill" />
+      <view wx:else class="avatar">🍹</view>
+      <view class="uinfo">
+        <view class="uname">{{nickname}}</view>
+        <view class="utip">{{level}}{{phone ? ' · ' + phone : ''}}</view>
+      </view>
+      <view class="tag" bindtap="logout">退出</view>
+    </block>
+    <block wx:else>
+      <view class="avatar">🍹</view>
+      <view class="uinfo">
+        <view class="uname">未登录</view>
+        <view class="utip">微信 / 手机号登录后可下点单</view>
+      </view>
+      <view class="tag" bindtap="goLogin">去登录</view>
+    </block>
+  </view>
+
+  <view class="card" bindtap="goMall">
+    <view class="m"><view class="mi">🎁 积分商城</view><view class="arr">›</view></view>
+  </view>
+
+  <view class="card" bindtap="goProfile">
+    <view class="m"><view class="mi">✏️ 编辑资料</view><view class="arr">›</view></view>
+  </view>
+
+  <view class="card" bindtap="goOrders">
+    <view class="m"><view class="mi me">🧾 我的订单</view><view class="arr">›</view></view>
+  </view>
+
+  <view class="card" bindtap="goMerchant" wx:if="{{isStaff}}">
+    <view class="m"><view class="mi me">🍹 商家工作台</view><view class="arr">›</view></view>
+  </view>
+
+  <view class="card">
+    <view class="m" wx:for="{{['联系客服', '关于我们']}}" wx:key="*this">
+      <view class="mi">{{item}}</view><view class="arr">›</view>
+    </view>
+  </view>
+</view>

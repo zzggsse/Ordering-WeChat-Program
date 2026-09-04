@@ -1,0 +1,55 @@
+<view class="page">
+  <view class="hero">
+    <view class="hp">
+      <view class="hl">我的积分</view>
+      <view class="hv">{{points}}</view>
+    </view>
+    <view class="hp">
+      <view class="hl">储值余额</view>
+      <view class="hv small">¥{{balance}}</view>
+    </view>
+    <view class="hp">
+      <view class="hl">会员等级</view>
+      <view class="hv small">{{level}}</view>
+    </view>
+  </view>
+
+  <view class="sec">充值送积分</view>
+  <view class="card">
+    <view class="row">
+      <input class="ipt" type="digit" placeholder="输入充值金额" value="{{amount}}" bindinput="onAmount" />
+      <view class="btn {{savingRecharge ? 'dis' : ''}}" bindtap="recharge">{{savingRecharge ? '充值中…' : '充值'}}</view>
+    </view>
+    <view class="hint">每充值 1 元赠送 1 消费积分；单次充值满 500 升级钻石会员（消费 1:2 送积分）</view>
+  </view>
+
+  <view class="sec">积分兑换优惠券</view>
+  <view class="coupon" wx:for="{{coupons}}" wx:key="id">
+    <view class="cu">
+      <view class="cn">{{item.name}}</view>
+      <view class="cd" wx:if="{{item.threshold > 0}}">满 ¥{{item.threshold}} 减 ¥{{item.discount}}</view>
+      <view class="cd" wx:else>立减 ¥{{item.discount}}</view>
+    </view>
+    <view class="cr" wx:if="{{points < (item.pointsCost || 0)}}">
+      <view class="cc">需 {{item.pointsCost}} 积分</view>
+      <view class="btn dis">积分不足</view>
+    </view>
+    <view class="cr" wx:else>
+      <view class="cc">需 {{item.pointsCost || 0}} 积分</view>
+      <view class="btn" bindtap="redeem" data-id="{{item.id}}" data-cost="{{item.pointsCost}}" data-name="{{item.name}}">兑换</view>
+    </view>
+  </view>
+  <view class="empty" wx:if="{{!coupons.length}}">暂无可兑换的优惠券</view>
+
+  <block wx:if="{{myCoupons.length}}">
+    <view class="sec">我的优惠券（{{myCoupons.length}}）</view>
+    <view class="coupon mine" wx:for="{{myCoupons}}" wx:key="id">
+      <view class="cu">
+        <view class="cn">{{item.name}}</view>
+        <view class="cd" wx:if="{{item.threshold > 0}}">满 ¥{{item.threshold}} 减 ¥{{item.discount}}</view>
+        <view class="cd" wx:else>立减 ¥{{item.discount}}</view>
+        <view class="cd">状态：{{item.status === 'UNUSED' ? '未使用' : item.status}}</view>
+      </view>
+    </view>
+  </block>
+</view>

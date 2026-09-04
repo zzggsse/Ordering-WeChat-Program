@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="srch">
+    <input placeholder="搜索奶茶 / 口味" confirm-type="search" bindinput="onSearch" />
+    <text>🔍</text>
+  </view>
+
+  <view class="cats">
+    <view class="cat {{activeKey===item.key?'on':''}}"
+          wx:for="{{categories}}" wx:key="key"
+          bindtap="switchCat" data-key="{{item.key}}">
+      <text class="ci">{{item.icon}}</text>
+      <text>{{item.label}}</text>
+    </view>
+  </view>
+
+  <view class="grid">
+    <view class="card" wx:for="{{shown}}" wx:key="id">
+      <view class="imgbox">
+        <image src="{{item.image}}" mode="aspectFill" />
+        <view class="reco" wx:if="{{item.recommended}}">热销</view>
+        <view class="sold" wx:if="{{item.soldout}}">已售罄</view>
+      </view>
+      <view class="body">
+        <view class="name">{{item.name}}</view>
+        <view class="sub">月售 {{item.sales}}</view>
+        <view class="brow">
+          <view class="price">¥{{item.price}}</view>
+          <view class="add {{item.soldout?'off':''}}" bindtap="addToCart" data-id="{{item.id}}">＋</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!shown.length}}">没有找到相关商品</view>
+
+  <view class="cartbar" wx:if="{{cartCount>0}}" bindtap="goCart">
+    <view class="cart-l"><text class="cart-icon">🛒</text><text>购物车 {{cartCount}} 件</text></view>
+    <view class="cart-go">去结算 ›</view>
+  </view>
+</view>

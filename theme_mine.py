@@ -1,0 +1,49 @@
+﻿# -*- coding: utf-8 -*-
+base = r'D:\Order\miniapp\pages\mine\mine'
+js = '''Page({
+  goMerchant() { wx.navigateTo({ url: '/pages/merchant/workbench' }) }
+})
+'''
+wxml = '''<view class="page">
+  <view class="top">
+    <view class="avatar">🍹</view>
+    <view class="uinfo">
+      <view class="uname">古茗会员</view>
+      <view class="utip">钻石 VIP · 积分 3280</view>
+    </view>
+    <view class="tag">已登录</view>
+  </view>
+
+  <view class="card">
+    <view class="m" wx:for="{{['优惠券', '储值余额', '积分明细', '收货地址']}}" wx:key="*this">
+      <view class="mi">{{item}}</view><view class="arr">›</view>
+    </view>
+  </view>
+
+  <view class="card" bindtap="goMerchant">
+    <view class="m"><view class="mi me">🍹 商家工作台</view><view class="arr">›</view></view>
+  </view>
+
+  <view class="card">
+    <view class="m" wx:for="{{['联系客服', '关于我们']}}" wx:key="*this">
+      <view class="mi">{{item}}</view><view class="arr">›</view>
+    </view>
+  </view>
+</view>
+'''
+wxss = '''.page { padding: 20rpx; }
+.top { background: #e8332d; border-radius: 20rpx; padding: 36rpx 30rpx; color: #fff; display: flex; align-items: center; gap: 24rpx; }
+.avatar { width: 100rpx; height: 100rpx; border-radius: 50%; background: rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-size: 50rpx; }
+.uinfo { flex: 1; }
+.uname { font-size: 34rpx; font-weight: 700; }
+.utip { font-size: 24rpx; opacity: .9; margin-top: 6rpx; }
+.tag { background: rgba(255,255,255,.25); padding: 6rpx 18rpx; border-radius: 20rpx; font-size: 22rpx; }
+.card { background: #fff; border-radius: 20rpx; margin-top: 20rpx; padding: 0 26rpx; box-shadow: 0 4rpx 16rpx rgba(0,0,0,.05); }
+.m { display: flex; justify-content: space-between; align-items: center; padding: 30rpx 0; border-bottom: 1rpx solid #f6f2ec; font-size: 30rpx; }
+.card .m:last-child { border-bottom: none; }
+.arr { color: #c0c4cc; }
+.me { color: #e8332d; font-weight: 600; }
+'''
+open(base + '.js', 'w', encoding='utf-8', newline='\n').write(js)
+open(base + '.wxml', 'w', encoding='utf-8', newline='\n').write(wxml)
+open(base + '.wxss', 'w', encoding='utf-8', newline='\n').write(wxss)
